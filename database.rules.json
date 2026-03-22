@@ -1,0 +1,22 @@
+{
+  "rules": {
+    "buses": {
+      ".read": "auth != null",
+      "$busId": {
+        ".write": "root.child('roles').child(auth.uid).val() === 'admin'",
+        "location": {
+          ".write": "root.child('buses').child($busId).child('driverIds').child(auth.uid).val() === true || root.child('roles').child(auth.uid).val() === 'admin'"
+        },
+        "activeDriverId": {
+          ".write": "root.child('buses').child($busId).child('driverIds').child(auth.uid).val() === true || root.child('roles').child(auth.uid).val() === 'admin'"
+        }
+      }
+    },
+    "roles": {
+      "$uid": {
+        ".read": "$uid === auth.uid",
+        ".write": "!data.exists() || root.child('roles').child(auth.uid).val() === 'admin'"
+      }
+    }
+  }
+}
