@@ -200,3 +200,4 @@ $RECYCLE.BIN/
 
 firebase.json
 .vscode
+lib/firebase_options.dart
